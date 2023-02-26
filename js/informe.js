@@ -104,7 +104,7 @@ var wrapper2 = document.getElementById("signature2"),
    signaturePad2 = new SignaturePad(canvas2);
 
 //Calculo de las horas normales y totales
-
+/*
 var fechaInicio = '';
 var horaInicio = '';
 var fechaFin = '';
@@ -235,13 +235,13 @@ hvj.addEventListener('change', (e) =>{
 if(hvj.value == '00:00:00'){
     hvj = '00:00:00';
 }
+*/
 
 
 
 
 
 
-/*
 
 let fechaFin = '';
 let fechaInicio = '';
@@ -328,7 +328,7 @@ let fechaInicio = '';
 
    }
 
-   */
+
 
 //funciones para reset de firmas
 
@@ -357,8 +357,8 @@ var formulario = document.getElementById("formulario");
   let presupuesto = '';
   
   let horasNormales = '';
-  let horasLab = '';
-  let horasViaje = '';
+  let horasLab = '0:00';
+  let horasViaje = '0:00';
   let horasTotales = '';
   let servicio = '';
   let obs = '';
