@@ -244,7 +244,10 @@ if(hvj.value == '00:00:00'){
 
 
 let fechaFin = '';
+let horaFin = '';
 let fechaInicio = '';
+let horaInicio = '';
+
 
    function calcHoras(){
 
@@ -254,12 +257,12 @@ let fechaInicio = '';
     
     let inipartes = inicio.split('T');
         fechaInicio = inipartes[0];
-    let horaInicio = inipartes[1];
+        horaInicio = inipartes[1];
 
 
     let finpartes = fin.split('T');
         fechaFin = finpartes[0];
-    let horaFin = finpartes[1];
+        horaFin = finpartes[1];
 
     let nor = '';
     var horainipartes = horaInicio.split(':');
@@ -289,6 +292,7 @@ let fechaInicio = '';
     nor =   normalhora.toString() +':'+ normalminuto.toString();
 
     document.querySelector('input[id="normales"]').value = nor;
+   
 
     var lab = document.getElementById('lab').value;
     var viaje = document.getElementById('viaje').value;
@@ -296,13 +300,13 @@ let fechaInicio = '';
     if (lab != ''){
         var labpar = lab.split(':');
         var labhora = parseInt(labpar[0]);
-        var labmin = parseInt(labpar['1']);
+        var labmin = parseInt(labpar[1]);
     } else{labhora = 0, labmin = 0} 
     
     if( viaje != ''){
         var viajepar = viaje.split(':');
         var viajehora = parseInt(viajepar[0]);
-        var viajemin = parseInt(viajepar['1']);
+        var viajemin = parseInt(viajepar[1]);
     }else{ viajehora =0, viajemin = 0}
 
     var totaleshora = normalhora + labhora +viajehora;
@@ -353,7 +357,7 @@ var formulario = document.getElementById("formulario");
   let modelo = '';
   let serie = '';
   let motivo = '';
-  let tipoTabajo = '';
+  let tipoTrabajo = '';
   let presupuesto = '';
   
   let horasNormales = '';
@@ -449,10 +453,11 @@ var formulario = document.getElementById("formulario");
       
       console.log('cliente seleccionado:', cliente);
       console.log('Motivo de la visita.', motivo);
-      horasNormales = hnormales;
-      horasLab = lab;
-      horasViaje = hvj;
-      horasTotales = total;
+      horasNormales = document.getElementById('normales').value;
+      horasLab = document.getElementById('lab').value;
+      horasViaje = document.getElementById('viaje').value;
+      horasTotales = document.getElementById('totales').value ;
+      
       
   
       let _body = {tecnico, cliente, descripcion, marca, modelo, serie, 
