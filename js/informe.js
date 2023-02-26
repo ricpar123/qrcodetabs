@@ -1,6 +1,12 @@
+
+Notification.requestPermission(function(status) {
+    console.log('Notification permission status:', status);
+});
+
+
 //insertar datos del qr scan
 
-
+/*
 jsarray = JSON.parse(sessionStorage.getItem('datos'));//recuperar datos de memoria
 
 //alert(jsarray);
@@ -21,7 +27,7 @@ document.querySelector('input[id="descripcion"]').value = desEquipo;
 document.querySelector('input[id="marca"]').value = marcaEquipo;
 document.querySelector('input[id="modelo"]').value = modEquipo;
 document.querySelector('input[id="serie"]').value = serieEquipo;
-
+*/
 //llenar datos de tecnicos
 
 
@@ -51,7 +57,7 @@ async function fetchUsuarios(){
 
     
 
-        var select = document.getElementById("tecnico");
+    var select = document.getElementById("tecnico");
     
     
 
@@ -98,6 +104,144 @@ var wrapper2 = document.getElementById("signature2"),
    signaturePad2 = new SignaturePad(canvas2);
 
 //Calculo de las horas normales y totales
+
+var fechaInicio = '';
+var horaInicio = '';
+var fechaFin = '';
+var horaFin = '';
+var hnormales = '';
+var htotales = 0;
+var mtotales = 0;
+var total = '';
+
+var inicio = document.getElementById('inicio');
+inicio.addEventListener('change', (e) =>{
+    inicio = e.target.value;
+   
+    let inipartes = inicio.split('T');
+    fechaInicio = inipartes[0];
+    horaInicio = inipartes[1];
+   
+    
+    
+}); 
+
+var fin = document.getElementById('fin');
+fin.addEventListener('change', (e) =>{
+    fin = e.target.value;
+    
+    let finpartes = fin.split('T');
+    fechaFin = finpartes[0];
+    horaFin = finpartes[1];
+
+    hnormales = normales();
+    console.log('horas normales: ', hnormales);
+
+    document.getElementById("normales").value =
+    document.getElementById("normales").defaultValue = hnormales; 
+    
+    total = totales(hnormales);
+    console.log('total:', total);
+
+    document.getElementById("totales").value =
+    document.getElementById("totales").defaultValue = total; 
+
+
+}); 
+
+function normales(){
+    let nor = '';
+    var horainipartes = horaInicio.split(':');
+    var horainiparte = horainipartes[0];
+    var minuiniparte = horainipartes[1];
+    console.log('partesIni: ', horainiparte, minuiniparte);
+
+    var horafinpartes = horaFin.split(':');
+    var horafinparte = horafinpartes[0];
+    var minufinparte = horafinpartes[1];
+    
+
+    normalhora = parseInt(horafinparte) - parseInt(horainiparte);
+    normalminuto = parseInt(minufinparte) - parseInt(minuiniparte);
+
+    if(normalminuto < 0){
+        normalhora = normalhora +1;
+        normalminuto = Math.abs(normalminuto);
+        
+    }else if(normalminuto < 10 ){
+       
+        normalminuto = '0'+normalminuto;
+    }
+    nor =   normalhora +':'+ normalminuto;
+    
+    return nor;
+}
+
+function totales(h){
+    var tot = '';
+
+    
+    var hr = h.split(':');
+    var hora = parseInt(hr[0]);
+    var minuto = parseInt(hr[1]);
+    console.log('minuto: ', minuto);
+    console.log('mtotales: ', mtotales);
+    htotales = htotales + hora;
+    mtotales = parseInt(mtotales) + minuto;
+    console.log('minutosTotales', mtotales);
+    if(mtotales >= 60){
+        mtotales = mtotales - 60;
+        htotales = htotales + 1;
+    }
+    if(mtotales < 10){
+        mtotales = '0'+ mtotales;
+    }
+
+
+
+    tot = htotales.toString() +':'+ mtotales.toString();
+
+    return tot;
+
+    
+
+}
+
+var lab = document.getElementById('lab');
+lab.addEventListener('change', (e) =>{
+    lab = e.target.value;
+    console.log('hlab:', lab);
+    total = totales(lab);
+    console.log('horas totales: ', total);
+
+    document.getElementById("totales").value =
+    document.getElementById("totales").defaultValue = total; 
+
+});
+if(lab.value == '00:00:00'){
+    lab = '00:00:00';
+}
+
+var hvj = document.getElementById('viaje');
+hvj.addEventListener('change', (e) =>{
+    hvj = e.target.value;
+    console.log('hviaje:', hvj);
+    total = totales(hvj);
+    console.log('Totales: ', total)
+
+    document.getElementById("totales").value =
+    document.getElementById("totales").defaultValue = total; 
+});
+if(hvj.value == '00:00:00'){
+    hvj = '00:00:00';
+}
+
+
+
+
+
+
+/*
 
 let fechaFin = '';
 let fechaInicio = '';
@@ -184,181 +328,154 @@ let fechaInicio = '';
 
    }
 
+   */
+
 //funciones para reset de firmas
 
 function signatureClear1() {
     //console.log('clear signature1');
     signaturePad1.clear();
-  }
+}
 
-  function signatureClear2() {
+function signatureClear2() {
     //console.log('clear signature2');
     signaturePad2.clear();
-  }
+}
 
   //Campos del formulario
 
-  var formulario = document.getElementById("formulario");
+var formulario = document.getElementById("formulario");
 
-var tecnico = [] = '';
-
-let cliente = '';
-let descripcion = '';
-let marca = '';
-let modelo = '';
-let serie = '';
-let motivo = '';
-let tipoTabajo = '';
-let presupuesto = '';
-
-let horasNormales = '';
-let horasLab = '';
-let horasViaje = '';
-let horasTotales = '';
-let servicio = '';
-let obs = '';
-let recibido = '';
-let ci = '';
-let fecha = '';
-let firmaCliente = '';
-let firmaTecnico = '';
-
-//Validar que los campos indicados con * sean llenados
-
-
-document.addEventListener('DOMContentLoaded', ()=>{
-    document.getElementById('formulario').addEventListener('submit', 
-    validarFormulario);
-});
-function validarFormulario(evento) {
-    evento.preventDefault();
-    
-    tecnico = document.getElementById('tecnico').value;
-    console.log('tecnico/s:', tecnico);
-    if(tecnico.length == 0){
-        alert('falta completar campo Tecnicos');
-        return;
-    }
-    
-    for( var option of document.getElementById('tecnico').options){
-        if(option.selected){
-            console.log('seleccionado:', option.value);
-            
-            tecnico.push(option.value);
-        }
-    }
-    
-    cliente = document.getElementById('cliente').value;
-    if(cliente.length == 0){
-        alert('falta completar campo Cliente');
-        return;
-    }
-
-    descripcion = document.getElementById('descripcion').value;
-    if(descripcion.length == 0){
-        alert('falta completar campo Descripcion');
-        return;
-    }
-
-    marca = document.getElementById('marca').value;
-    if(marca.length == 0){
-        alert('falta completar campo Marca');
-        return;
-    }
-
-    modelo = document.getElementById('modelo').value;
-    if(modelo.length == 0){
-        alert('falta completar campo Modelo');
-        return;
-    }
-
-    serie = document.getElementById('serie').value;
-    if(serie.length == 0){
-        alert('falta completar campo Serie');
-        return;
-    }
-
-    motivo = document.getElementById('motivo').value;
-    if(motivo.length == 0){
-        alert('falta completar campo Motivo');
-        return;
-    }
-
-    if(nor.length == 0){
-        alert('falta completar campo Horas Normales');
-        return;
-    }
-
-    if(totales.length == 0){
-        alert('falta completar campo Horas Totales');
-        return;
-    }
-
-    servicio = document.getElementById('servicio').value;
-    if(servicio.length == 0){
-        alert('falta completar campo Servicio realizado');
-        return;
-    }
-
-    fecha = document.getElementById('fecha').value;
-    if(fecha.length == 0){
-        alert('falta completar campo Fecha de elaboracion');
-        return;
-    }
-
-
-    let base64 = signaturePad1.toDataURL('image/png').split(';base64,')[1];
-    firmaCliente = base64;
-
-    let base64T = signaturePad2.toDataURL('image/png').split(';base64,')[1];
-    firmaTecnico = base64T;
-
-   
-    if(firmaCliente.length == 0){
-        alert('falta completar campo Firma del cliente');
-        return;
-    }
-
-   
-    if(firmaTecnico.length == 0){
-        alert('falta completar campo Firma del tecnico');
-        return;
-    }
-
-    
-
-    const radioB = document.querySelectorAll('input[name= "trabajo"]');
-    const radioB2 = document.querySelectorAll('input[name= "presu"]');
+  var tecnico = [];
+  var cliente = '';
+  let descripcion = '';
+  let marca = '';
+  let modelo = '';
+  let serie = '';
+  let motivo = '';
+  let tipoTabajo = '';
+  let presupuesto = '';
+  
+  let horasNormales = '';
+  let horasLab = '';
+  let horasViaje = '';
+  let horasTotales = '';
+  let servicio = '';
+  let obs = '';
+  let recibido = '';
+  let ci = '';
+  let fecha = '';
+  let firma = '';
+  let firmaT = '';
+  
+  
+  
+  
+    function validar(e) {
+          e.preventDefault();
+          const radioB = document.querySelectorAll('input[name= "trabajo"]');
+          const radioB2 = document.querySelectorAll('input[name= "presu"]');
+          
+          
+  
+          for( const radiobutton of radioB) {
+              if(radiobutton.checked){
+                  tipoTrabajo = radiobutton.value;
+              }
+          }
+  
+          for( const radiobu2 of radioB2){
+              if(radiobu2.checked){
+                  presupuesto = radiobu2.value;
+              }
+          }
+          
+          var tec = document.getElementById("tecnico").value;
+          //console.log('Tecnico/s:', tec);
+          cliente = document.getElementById("cliente").value;
+          motivo = document.getElementById("motivo").value;
+         
+          
+          servicio = document.getElementById("destrabajo").value;
+          firma = document.getElementById("firma");
+          firmaT = document.getElementById("firmaT");
+          fecha = document.getElementById("fecha").value;
+          
+          obs = document.getElementById("obs").value;
+          recibido = document.getElementById("recibido").value;
+          ci = document.getElementById("ci").value;
+          
+  
+  
+          
+          if(tec == 0 || cliente == 0 || motivo == 0 ||  
+               fechaInicio == 0 || fechaFin == 0 || servicio == 0  
+              || fecha == 0 || signaturePad1.isEmpty() || 
+              tipoTrabajo == 0 || presupuesto == 0 || signaturePad2.isEmpty()  ){
+              e.preventDefault();
+              alert('Error, los campos marcados con * deben ser completados');
+              return;
+  
+          }else {
+              e.preventDefault();
+              //var selected = [];
+              for( var option of document.getElementById('tecnico').options){
+                  if(option.selected){
+                      tecnico.push(option.value);
+                  }
+              }
+              
+              }
+        
+          
+              console.log('tecnico/s: ', tecnico);
+       descripcion = document.getElementById("descripcion").value;
+       marca = document.getElementById("marca").value; 
+       modelo = document.getElementById("modelo").value;
+       serie = document.getElementById("serie").value;
        
-    for( const radiobutton of radioB) {
-        if(radiobutton.checked){
-            tipoTrabajo = radiobutton.value;
-        }else{
-            alert('falta completar tipo de trabajo');
-            return;
-        }
-    }
-
-    for( const radiobu2 of radioB2){
-        if(radiobu2.checked){
-            presupuesto = radiobu2.value;
-        }else {
-            alert('falta completar el campo Presupuesto');
-            return;
-        }
-    }
-
-    let _body = {tecnico, cliente, descripcion, marca, modelo, serie, 
-        motivo, tipoTrabajo, presupuesto, fechaInicio, horaInicio, 
-        fechaFin, horaFin, horasNormales, horasLab, horasViaje, 
-        horasTotales, servicio, obs, recibido, ci, firmaCliente, firmaTec, 
-        fecha };
-
-console.log('datos a enviar: ', _body);
-
-   this.submit(); 
-   console.log('submit valido');
+  
+  
+  
+       let base64 = signaturePad1.toDataURL('image/png').split(';base64,')[1];
+       firma = base64;
    
-}
-
-
+       let base64T = signaturePad2.toDataURL('image/png').split(';base64,')[1];
+       firmaT = base64T;
+      //console.log(base64);
+  
+  
+     
+      
+      console.log('cliente seleccionado:', cliente);
+      console.log('Motivo de la visita.', motivo);
+      horasNormales = hnormales;
+      horasLab = lab;
+      horasViaje = hvj;
+      horasTotales = total;
+      
+  
+      let _body = {tecnico, cliente, descripcion, marca, modelo, serie, 
+                  motivo, tipoTrabajo, presupuesto, fechaInicio, horaInicio, 
+                  fechaFin, horaFin, horasNormales, horasLab, horasViaje, 
+                  horasTotales, servicio, obs, recibido, ci, firma, firmaT, 
+                  fecha };
+  
+      console.log('datos a enviar: ', _body);
+      //enviar el formulario al service worker
+     /*
+      var form = { 'formData' : _body };
+      navigator.serviceWorker.controller.postMessage(form);
+      console.log('datos enviados al sw ');
+  
+      navigator.serviceWorker.addEventListener('message', e =>{
+          if(e.data.form == 'recibido'){
+              console.log('sw recibio los datos');
+          }
+      })
+     */ 
+    
+    }
+  
+      formulario.addEventListener('submit', validar);
+  
