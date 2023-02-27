@@ -289,7 +289,7 @@ let horaInicio = '';
         normalminuto = '0'+normalminuto;
         console.log('minutosNormales2: ', normalminuto);
     }
-    nor =   normalhora.toString() +':'+ normalminuto.toString();
+    nor =   normalhora +':'+ normalminuto;
 
     document.querySelector('input[id="normales"]').value = nor;
    
@@ -310,7 +310,7 @@ let horaInicio = '';
     }else{ viajehora =0, viajemin = 0}
 
     var totaleshora = normalhora + labhora +viajehora;
-    var totalesmin = normalminuto + labmin + viajemin;
+    var totalesmin = parseInt(normalminuto) + parseInt(labmin) + parseInt(viajemin);
 
     console.log('minutos totales:', totalesmin);
     if(totalesmin > 120){
@@ -325,7 +325,7 @@ let horaInicio = '';
         totalesmin = '0' + totalesmin;
     }
 
-    var totales = totaleshora.toString()+':'+totalesmin.toString();
+    var totales = totaleshora+':'+totalesmin;
 
     document.querySelector('input[id = "totales"]').value = totales;
 
