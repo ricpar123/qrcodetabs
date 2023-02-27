@@ -309,7 +309,7 @@ let horaInicio = '';
         var viajemin = parseInt(viajepar[1]);
     }else{ viajehora =0, viajemin = 0}
 
-    var totaleshora = normalhora + labhora +viajehora;
+    var totaleshora = parseInt(normalhora) + parseInt(labhora) + parseInt(viajehora);
     var totalesmin = parseInt(normalminuto) + parseInt(labmin) + parseInt(viajemin);
 
     console.log('minutos totales:', totalesmin);
