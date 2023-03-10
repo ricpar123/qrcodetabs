@@ -1,4 +1,8 @@
 
+
+
+
+
 Notification.requestPermission(function(status) {
     console.log('Notification permission status:', status);
 });
@@ -99,9 +103,12 @@ var wrapper2 = document.getElementById("signature2"),
 
     resizeCanvas(canvas1);
     signaturePad1 = new SignaturePad(canvas1);
+    resizeCanvas(canvas2);
+    signaturePad2 = new SignaturePad(canvas2);
 
-   resizeCanvas(canvas2);
-   signaturePad2 = new SignaturePad(canvas2);
+
+
+
 
 //Calculo de las horas normales y totales
 /*
@@ -337,12 +344,12 @@ let horaInicio = '';
 //funciones para reset de firmas
 
 function signatureClear1() {
-    //console.log('clear signature1');
+    console.log('clear signature1');
     signaturePad1.clear();
 }
 
 function signatureClear2() {
-    //console.log('clear signature2');
+    console.log('clear signature2');
     signaturePad2.clear();
 }
 
