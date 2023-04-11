@@ -50,6 +50,7 @@ btnScanQR.onclick = () => {
     });
 };
 
+
 function tick() {
   canvasElement.height = video.videoHeight;
   canvasElement.width = video.videoWidth;
