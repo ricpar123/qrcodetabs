@@ -3,6 +3,7 @@
 
 
 
+
 Notification.requestPermission(function(status) {
     console.log('Notification permission status:', status);
 });
@@ -10,7 +11,7 @@ Notification.requestPermission(function(status) {
 
 //insertar datos del qr scan
 
-/*
+
 jsarray = JSON.parse(sessionStorage.getItem('datos'));//recuperar datos de memoria
 
 //alert(jsarray);
@@ -31,7 +32,7 @@ document.querySelector('input[id="descripcion"]').value = desEquipo;
 document.querySelector('input[id="marca"]').value = marcaEquipo;
 document.querySelector('input[id="modelo"]').value = modEquipo;
 document.querySelector('input[id="serie"]').value = serieEquipo;
-*/
+
 //llenar datos de tecnicos
 
 
@@ -105,6 +106,15 @@ var wrapper2 = document.getElementById("signature2"),
     signaturePad1 = new SignaturePad(canvas1);
     resizeCanvas(canvas2);
     signaturePad2 = new SignaturePad(canvas2);
+
+
+var signaturePad1 = new SignaturePad(document.getElementById('signature1'),{
+    penColor: 'rgb(0,0,0)'
+});
+
+var signaturePad2 = new SignaturePad(document.getElementById('signature2'),{
+    penColor: 'rgb(0,0,0)'
+});
 
 
 
@@ -408,8 +418,8 @@ var formulario = document.getElementById("formulario");
          
           
           servicio = document.getElementById("destrabajo").value;
-          firma = document.getElementById("firma");
-          firmaT = document.getElementById("firmaT");
+          firma = document.getElementById("signature1");
+          firmaT = document.getElementById("signature2");
           fecha = document.getElementById("fecha").value;
           
           obs = document.getElementById("obs").value;

@@ -156,16 +156,24 @@ button:hover{
       color: rgb(12, 11, 11);
   
 }
-/*
+
 .wrapper {
-  border: 1px solid #4b00ff;
-  border-right: 0;
-}
-*/
-.signature {
-  background: #1ee71b;
   position: relative;
-  width: 75%;
+    width: 200px;
+    height: 100px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.signature-pad {
+  background: #1ee71b;
+  position: absolute;
+    left: 0;
+    top: 0;
+    width:200px;
+    height:100px;
   
   cursor: crosshair;
 }
@@ -173,6 +181,7 @@ button:hover{
 @media only screen and (max-width: 600px) {
   .signature {
     width: 100%;
+    height: 25%;
     
   }
   

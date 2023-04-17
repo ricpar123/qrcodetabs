@@ -146,21 +146,30 @@
 
         <div>
             <label for="firma">Firma del Cliente (*)</label>
-            <input id="firma" class="wrapper" type="hidden">
+           <!-- <input id="firma" class="wrapper" type="hidden">-->
         </div>
-        <div id="signature1" class="signature">
-            <canvas></canvas>
+        <div class="wrapper">
+           
+                <canvas id="signature1" class="signature-pad" width="200" height="100"></canvas>
+            
+
         </div>
+        
         <button type="button" onclick="signatureClear1()">Borrar Firma de Cliente</button>
 
 
         <div>
             <label for="firmaT">Firma del Tecnico (*)</label>
-            <input id="firmaT" class="wrapper" type="hidden">
+           <!-- <input id="firmaT" class="wrapper" type="hidden">-->
         </div>
-        <div id="signature2" class="signature">
-            <canvas></canvas>
+
+        <div class="wrapper">
+
+           <canvas id="signature2" class="signature-pad" width="200" height="100"></canvas>
+            
+
         </div>
+        
         <button type="button" onclick="signatureClear2()">Borrar Firma de Tecnico</button>
 
         <div class="btn">
@@ -176,7 +185,7 @@
 
 
     </form>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
     <script src="../js/informe.js"></script>
     
 </body>
