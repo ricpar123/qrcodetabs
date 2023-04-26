@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/info.css">
+
+    
    
    
     <title>Informe de Servicio</title>
@@ -18,7 +20,7 @@
         <div class="six-columns">
             <div class="fields">
                 <label for='tecnico'>Seleccionar tecnico (*)</label>
-                <select id="tecnico" class="sel" multiple="multiple" ></select>
+                <select id="tecnico" class="sel" multiple></select>
             </div>
             <div class="fields">
                 <label for='cliente'>Cliente (*)</label>
@@ -87,32 +89,24 @@
         </div>
 
         <div class="six-columns">
-            <p>Tipo de trabajo (*)</p>
+           <label>Tipo de Trabajo(*)</label>
             <div class="fields">
-                <label for='montaje'>Montaje </label>
+                <p>Montaje </p>
                 <input type="radio" id="montaje" name="trabajo" value='montaje'>
-            </div>
-            <div class="fields">
-                <label for='garantia'>Garantia</label>
+                <p>Garantia</p>
                 <input type="radio" id="garantia" name="trabajo" value='garantia'>
-            </div>
-            <div class="fields">
-                <label for='contrato'>Contrato</label>
+                <p>Contrato</p>
                 <input type="radio" id="contrato" name="trabajo" value='contrato'>
-            </div>
-            <div class="fields">
-                <label for='facturar'>A Facturar</label>
+                <p>A Facturar</p>
                 <input type="radio" id="facturar" name="trabajo" value='a facturar'>
-            </div>
-            <div class="fields">
-                <label for='varios'>Varios</label>
+                <p>Varios</p>
                 <input type="radio" id="varios" name="trabajo" value='varios'>
             </div>
             <div class="fields">
-                <p>Oferta (*)</p>
-                <label for='si'>Si</label>
+                <label>Oferta (*)</label>
+                <p>Si</p>
                 <input type="radio" id="si" name="presu" value='si'>
-                <label for='no'>No</label>
+                <p>No</p>
                 <input type="radio" id="no" name="presu" value='no'>
             </div>
         </div>
@@ -144,49 +138,48 @@
             
         </div>
 
-        <div>
-            <label for="firma">Firma del Cliente (*)</label>
-           <!-- <input id="firma" class="wrapper" type="hidden">-->
-        </div>
-        <div class="wrapper">
+        
+
+            <div>
+                <label for="firma">Firma del Cliente (*)</label>
+                <input id="firma" type="hidden">
+            </div>
+                <div class="wrapper">
+                    <canvas id="signature-pad1" width="400" height="200"></canvas>
+                </div>
+                <div class="clear-btn">   
+                 <button type="button" onclick="clear1()"><span>Reset</span></button>
+                </div>
+            <div>
+                <label for="firmaT">Firma del Tecnico (*)</label>
+                <input id="firmaT" type="hidden">
+            </div>
+                <div class="wrapper">
+                    <canvas id="signature-pad2" width="400" height="200"></canvas>
+                </div> 
+                <div class="clear-btn">
+                    <button type="button" onclick="clear2()"><span>Reset</span></button>   
            
-                <canvas id="signature1" class="signature-pad" width="200" height="100"></canvas>
-            
-
-        </div>
+                </div>
         
-        <button type="button" onclick="signatureClear1()">Borrar Firma de Cliente</button>
-
-
-        <div>
-            <label for="firmaT">Firma del Tecnico (*)</label>
-           <!-- <input id="firmaT" class="wrapper" type="hidden">-->
-        </div>
-
-        <div class="wrapper">
-
-           <canvas id="signature2" class="signature-pad" width="200" height="100"></canvas>
-            
-
-        </div>
+      
         
-        <button type="button" onclick="signatureClear2()">Borrar Firma de Tecnico</button>
-
         <div class="btn">
 			<button type="button" onclick="calcHoras()" >Calcular Horas</button>
 		</div>
         
         
         <div class="btn">
-			<button type="submit" >Enviar</button>
+			<button type="submit">Enviar</button>
 		</div>
 
 
 
 
     </form>
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <script src="../js/informe.js"></script>
     
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js"></script>
+    <script src="../js/informe.js"></script> 
 </body>
 </html>
