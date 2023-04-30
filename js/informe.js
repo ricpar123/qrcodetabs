@@ -32,7 +32,8 @@ document.querySelector('input[id="serie"]').value = serieEquipo;
 async function fetchUsuarios(){
    
     const res = await fetch('https://serveringroup.herokuapp.com/usuarios/tabla', 
-        {
+       
+            {
             method: "GET"
             
             });
@@ -282,36 +283,11 @@ function validar(e) {
    
    console.log('datos a enviar: ', _body);
 
-   async function fetchInformes(){
    
-    const res = await fetch('https://serveringroup.herokuapp.com/informes', {
-    method: "POST",
-    body : JSON.stringify(_body),
-    headers: {"Content-Type": "application/json"}
-})
-.then( response => response.json())
-.then((data)=> {
-    if(data.ok == false){
-        alert('error en guardar datos')
-    }else{
-        alert('informe guardado en bd');
-        alert('onLine...se envia al instante');
-        alert('offLine...se envia apenas se tenga conexion');
-        
-    }
 
-})
-.catch((error)=>{
-    console.log('Error', error);
-});
-   
-    
-}
-
-//fetchInformes();
     
 //enviar el formulario al service worker
-/*
+
 var form = { 'formData' : _body };
 navigator.serviceWorker.controller.postMessage(form);
 console.log('datos enviados al sw ');
@@ -320,8 +296,19 @@ navigator.serviceWorker.addEventListener('message', e =>{
     if(e.data.form == 'recibido'){
         console.log('sw recibio los datos');
     }
-})
-*/ 
+});
+
+async function syncMessagesLater() {
+    const registration = await navigator.serviceWorker.ready;
+    try {
+      await registration.sync.register("nuevo-informe");
+      console.log('sync registrado!');
+    } catch {
+      console.log("Background Sync could not be registered!");
+    }
+  }
+
+  syncMessagesLater();
 
 }
 
