@@ -1,6 +1,8 @@
 
-Notification.requestPermission(function(status) {
-    console.log('Notification permission status:', status);
+Notification.requestPermission().then((permiso) =>{
+    if(permiso === 'granted'){
+        console.log('permiso concedido')
+    }
 });
 
 
