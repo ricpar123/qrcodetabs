@@ -312,6 +312,12 @@ async function syncMessagesLater() {
 
   syncMessagesLater();
 
+  if(navigator.onLine){
+    return
+  }else{
+    alert('Offline! - informe se enviara al tener conexion')
+  }
+
 }
 
 
