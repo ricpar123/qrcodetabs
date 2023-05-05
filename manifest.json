@@ -2,43 +2,44 @@
     "short_name": "Informe",
     "name": "Informe de Servicios",
     "start_url": "index.html",
+    "id": "index.html",
     "background_color": "#3498db",
     "theme_color": "#3498db",
     "display": "standalone",
     "orientation": "portrait",
     "icons": [
         {
-            "src": "img/icon-48-48.png",
+            "src": "img/icon-48x48.png",
             "type": "image/png",
             "sizes": "48x48"
   
         },
         {
-          "src": "img/icon-72-72.png",
+          "src": "img/icon-72x72.png",
           "type": "image/png",
           "sizes": "72x72"
   
           },
           {
-              "src": "img/icon-96-96.png",
+              "src": "img/icon-96x96.png",
               "type": "image/png",
               "sizes": "96x96"
       
           },
           {
-              "src": "img/icon-144-144.png",
+              "src": "img/icon-144x144.png",
               "type": "image/png",
               "sizes": "144x144"
       
           },
           {
-              "src": "img/icon-192-192.png",
+              "src": "img/icon-192x192.png",
               "type": "image/png",
               "sizes": "192x192"
       
           },
           {
-              "src": "img/icon-512-512.png",
+              "src": "img/icon-512x512.png",
               "type": "image/png",
               "sizes": "512x512"
       
